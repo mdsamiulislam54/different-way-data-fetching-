@@ -1,16 +1,24 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import  AsynchronousFetch from '../../utilitis/asynchronousFetch'
 const Asynchronous = () => {
-    const data = AsynchronousFetch()
-    console.log(data)
+    const [user, setUser] = useState([])
+
+    useEffect(() => {
+        const fetchData = async () => {
+            const data = await AsynchronousFetch()
+            setUser(data)
+        }
+        fetchData()
+    },[])
+   
   return (
     <div>
         {
-            data?.map((item) => {
+            user?.map((item) => {
                 return (
                     <div key={item.id}>
-                        <h1>{item.name}</h1>
-                        <p>{item.email}</p>
+                        <h1>{item.username}</h1>
+                       
                     </div>
                 )
             })
